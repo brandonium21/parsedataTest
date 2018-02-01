@@ -14,4 +14,4 @@ RUN `FLASK_APP=main.py flask run`
 
 Thanks for the oppertunity.
 
-![review](http://recordit.co/DMcqJocRQ1/)
+example of work http://recordit.co/DMcqJocRQ1/
