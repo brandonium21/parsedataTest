@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h1 class="mx-auto" >Brandon's Magnificent METER APP (BMMA)</h1>
+        </div>
+        <br><br>
+      </div>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-10">
+          {% for meterRow in data | batch(3, '&nbsp;') %}
+          <div class="row">
+            {% for meter in meterRow %}
+            <div class="col">
+              <div class="card border-dark mb-3" style="width: 18rem;">
+                <div class="card-body text-dark">
+                  <h5 class="card-title" id="sumId">{{meter.id}} - ({{meter.type}})</h5>
+                  <h6 class="card-subtitle mb-2 text-muted" id="bill-summary">Card subtitle</h6>
+                  <p class="card-text" id="dataOut">
+                    <code>
+                      {{meter.attributes}}
+                    </code>
+                  </p>
+                  <p class="card-link float-left" id="meter">{{meter.relationships.meter.data.id}}</p>
+                  <p class="card-link float-right" id="building">{{meter.relationships.building.data.id}}</p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col"></div>
+        <br>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script>
+        $.getJSON("https://snapmeter.com/api/v2/531e19848df5cb0b35014e85/meters/2166484536790/bill-summary?token=6d547442-417b-41a3-8838-b022f9c2974d?callback=?", function(json) {
+  $(".message").html(JSON.stringify(json));
+});
+    </script>
+  </body>
+</html>
